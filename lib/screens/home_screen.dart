@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:optimum_music/widgets/app_bar.dart';
+import 'package:optimum_music/screens/image_resoponse_screen.dart';
+import 'package:optimum_music/widgets/app_logo.dart';
+import 'package:optimum_music/widgets/btn.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -7,72 +9,41 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _size = MediaQuery.of(context).size;
-    final _textTheme = Theme.of(context).textTheme;
     return Scaffold(
-      appBar: PreferredSize(
-          preferredSize: Size(_size.width, _size.height * 0.1),
-          child: const Center(child: AppBarWidget())),
-      body: Container(
-        padding: EdgeInsets.symmetric(horizontal: _size.width*0.07),
-        alignment: Alignment.center,
+      body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Identified Current Mood'),
-            Text(
-              'Happy',
-              style:
-                  _textTheme.headline2!.copyWith(fontWeight: FontWeight.w500),
+            const AppLogo(
+              height: 100,
             ),
             SizedBox(
-              height: _size.height*0.05,
+              height: _size.height * 0.05,
             ),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text('Re-Identify'),
-              style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.blue[400])),
+            CustomButton(
+              onTap: () {
+                Navigator.of(context)
+                    .pushReplacement(MaterialPageRoute(builder: (context) {
+                  return const ImageResponseScreen();
+                }));
+              },
+              title: 'Add Image',
+              icon: Icons.image,
+              index: 1,
             ),
             SizedBox(
-              height:  _size.height*0.025,
+              height: _size.height * 0.01,
             ),
-            Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  'Recommended Songs',
-                )),
-            SizedBox(
-              height:  _size.height*0.025,
-            ),
-            Expanded(
-              child: ListView.builder(
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      padding: EdgeInsets.only(bottom: 15),
-                      child: Row(
-                        children: [
-                          Image.asset(
-                            'assets/images/chaff.jpg',
-                            width:  _size.height*0.085,
-                            height: _size.height*0.085,
-                          ),
-                          SizedBox(
-                            width: 15,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('Chaff & Dust'),
-                              Text(
-                                "HYONNA",
-                                style: _textTheme.bodyText1!.copyWith(
-                                    fontSize: 10, color: Colors.blueGrey),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    );
-                  }),
+            CustomButton(
+              onTap: () {
+                // Navigator.of(context)
+                //     .pushReplacement(MaterialPageRoute(builder: (context) {
+                //   return const HomeScreen();
+                // }));
+              },
+              index: 2,
+              title: 'Add Video',
+              icon: Icons.video_library_outlined,
             )
           ],
         ),

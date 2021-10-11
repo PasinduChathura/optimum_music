@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:optimum_music/widgets/app_logo.dart';
-import 'package:optimum_music/widgets/svg_icon.dart';
 
 class AppBarWidget extends StatelessWidget {
   const AppBarWidget({Key? key}) : super(key: key);
