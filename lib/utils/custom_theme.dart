@@ -54,49 +54,51 @@ class CustomTheme {
       color: Colors.white,
       fontFamily: 'OpenSans',
       fontSize: 21,
-      fontWeight: FontWeight.w900);
+
+      fontWeight: FontWeight.w500);
 
   static TextStyle get _headline1Light => const TextStyle(
       color: Colors.white,
       fontFamily: 'OpenSans',
       fontSize: 23,
-      fontWeight: FontWeight.w900);
+      letterSpacing: 1,
+      fontWeight: FontWeight.w500);
 
   static TextStyle get _headline2Light => const TextStyle(
       color: Colors.white,
       fontFamily: 'OpenSans',
       fontSize: 21,
-      fontWeight: FontWeight.w900);
+      fontWeight: FontWeight.w500);
 
   static TextStyle get _headline3Light => const TextStyle(
       color: Colors.white,
       fontFamily: 'OpenSans',
       fontSize: 19,
-      fontWeight: FontWeight.w900);
+      fontWeight: FontWeight.w500);
 
   static TextStyle get _headline4Light => const TextStyle(
       color: Colors.white,
       fontFamily: 'OpenSans',
       fontSize: 17,
-      fontWeight: FontWeight.w900);
+      fontWeight: FontWeight.w500);
 
   static TextStyle get _headline5Light => const TextStyle(
       color: Colors.white,
       fontFamily: 'OpenSans',
       fontSize: 16,
-      fontWeight: FontWeight.w900);
+      fontWeight: FontWeight.w500);
 
   static TextStyle get _headline6Light => const TextStyle(
       color: Colors.white,
       fontFamily: 'OpenSans',
       fontSize: 14,
-      fontWeight: FontWeight.w700);
+      fontWeight: FontWeight.w500);
 
   static TextStyle get _buttonLight => const TextStyle(
       color: Colors.white,
       fontFamily: 'OpenSans',
       fontSize: 15,
-      fontWeight: FontWeight.w700);
+      fontWeight: FontWeight.w500);
 
   static TextStyle get _subtitle1Light => const TextStyle(
       color: Colors.white,
@@ -108,5 +110,5 @@ class CustomTheme {
       color: Colors.white,
       fontFamily: 'OpenSans',
       fontSize: 21,
-      fontWeight: FontWeight.w900);
+      fontWeight: FontWeight.w500);
 }
