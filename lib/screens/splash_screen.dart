@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:optimum_music/screens/home_screen.dart';
+import 'package:optimum_music/widgets/app_logo.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -30,11 +31,9 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: HexColor('0a1227'),
       body: Center(
-        child: SizedBox(
-          height: _size.height * 0.1,
-          child: Image.asset('assets/images/logo_transparent.png'),
-        ),
-      ),
+          child: AppLogo(
+        height: _size.height * 0.1,
+      )),
     );
   }
 }

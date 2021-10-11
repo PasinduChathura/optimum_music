@@ -10,7 +10,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: Size(_size.width, _size.height * 0.1),
-          child: const AppBarWidget()),
+          child: const Center(child: AppBarWidget())),
       body: Container(),
     );
   }
