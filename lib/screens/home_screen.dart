@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:optimum_music/utils/api_respons_model.dart';
 import 'package:optimum_music/widgets/app_bar.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -13,7 +14,7 @@ class HomeScreen extends StatelessWidget {
           preferredSize: Size(_size.width, _size.height * 0.1),
           child: const Center(child: AppBarWidget())),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: _size.width*0.07),
+        padding: EdgeInsets.symmetric(horizontal: _size.width * 0.07),
         alignment: Alignment.center,
         child: Column(
           children: [
@@ -24,15 +25,20 @@ class HomeScreen extends StatelessWidget {
                   _textTheme.headline2!.copyWith(fontWeight: FontWeight.w500),
             ),
             SizedBox(
-              height: _size.height*0.05,
+              height: _size.height * 0.05,
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                APICall().aPICall().then((value) {
+                  print(value.recommendations);
+                });
+              },
               child: Text('Re-Identify'),
-              style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.blue[400])),
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.blue[400])),
             ),
             SizedBox(
-              height:  _size.height*0.025,
+              height: _size.height * 0.025,
             ),
             Align(
                 alignment: Alignment.topLeft,
@@ -40,7 +46,7 @@ class HomeScreen extends StatelessWidget {
                   'Recommended Songs',
                 )),
             SizedBox(
-              height:  _size.height*0.025,
+              height: _size.height * 0.025,
             ),
             Expanded(
               child: ListView.builder(
@@ -52,8 +58,8 @@ class HomeScreen extends StatelessWidget {
                         children: [
                           Image.asset(
                             'assets/images/chaff.jpg',
-                            width:  _size.height*0.085,
-                            height: _size.height*0.085,
+                            width: _size.height * 0.085,
+                            height: _size.height * 0.085,
                           ),
                           SizedBox(
                             width: 15,
