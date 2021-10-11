@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:optimum_music/utils/api_respons_model.dart';
+import 'package:optimum_music/utils/models.dart';
 import 'package:optimum_music/widgets/app_bar.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -29,8 +29,8 @@ class HomeScreen extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                APICall().aPICall().then((value) {
-                  print(value.recommendations);
+                APICall().activity().then((value) {
+                  print(value.activity);
                 });
               },
               child: Text('Re-Identify'),
