@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:optimum_music/constants/dummy.dart';
 import 'package:optimum_music/screens/emotion_screen.dart';
+import 'package:optimum_music/utils/models.dart';
 import 'package:optimum_music/widgets/app_bar.dart';
 import 'package:optimum_music/widgets/image_response_loading_widget.dart';
 import 'package:shimmer/shimmer.dart';
@@ -8,8 +10,10 @@ import 'package:shimmer/shimmer.dart';
 enum LoadingState { Loading, NotLoading }
 
 class ImageResponseScreen extends StatefulWidget {
-  const ImageResponseScreen({Key? key, required this.imageFile})
-      : super(key: key);
+  const ImageResponseScreen({
+    Key? key,
+    required this.imageFile,
+  }) : super(key: key);
   final XFile? imageFile;
 
   @override
@@ -20,6 +24,9 @@ class _ImageResponseScreenState extends State<ImageResponseScreen>
     with SingleTickerProviderStateMixin {
   late PageController _tabController;
   LoadingState _lodingState = LoadingState.Loading;
+  Emotion? _emotion;
+  Activity? _activity;
+  Demographic? _demographic;
 
   int _selectedIndex = 0;
   @override
@@ -32,7 +39,10 @@ class _ImageResponseScreenState extends State<ImageResponseScreen>
   }
 
   void _init() async {
-    await Future.delayed(const Duration(seconds: 3));
+    _emotion = await APICall().emotion();
+    _activity = await APICall().activity();
+    _demographic = await APICall().demographic();
+
     setState(() {
       _lodingState = LoadingState.NotLoading;
     });
@@ -136,8 +146,12 @@ class _ImageResponseScreenState extends State<ImageResponseScreen>
                       physics: const NeverScrollableScrollPhysics(),
                       children: [
                         // first tab bar view widget
-                        EmotionScreen(),
-                        EmotionScreen(),
+                        EmotionScreen(
+                          emotion: _emotion,
+                        ),
+                        EmotionScreen(
+                          emotion: _emotion,
+                        ),
 
                         // second tab bar view widget
                       ],

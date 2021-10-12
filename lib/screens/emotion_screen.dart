@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:optimum_music/utils/models.dart';
 
 class EmotionScreen extends StatelessWidget {
-  const EmotionScreen({Key? key}) : super(key: key);
+
+  final Emotion? emotion;
+  const EmotionScreen({Key? key, this.emotion})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +16,7 @@ class EmotionScreen extends StatelessWidget {
       //     preferredSize: Size(_size.width, _size.height * 0.1),
       //     child: const Center(child: AppBarWidget())),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: _size.width * 0.07),
+        //  padding: EdgeInsets.symmetric(horizontal: _size.width * 0.07),
         alignment: Alignment.center,
         child: NotificationListener<OverscrollIndicatorNotification>(
           onNotification: (overscroll) {
@@ -27,7 +31,7 @@ class EmotionScreen extends StatelessWidget {
                 ),
                 const Text('Identified Current Mood'),
                 Text(
-                  'Happy',
+                  emotion!.emotion,
                   style: _textTheme.headline2!
                       .copyWith(fontWeight: FontWeight.w500),
                 ),
@@ -52,47 +56,15 @@ class EmotionScreen extends StatelessWidget {
                 SizedBox(
                   height: _size.height * 0.025,
                 ),
-                // Expanded(
-                //   child: ListView.builder(
-                //       itemCount: 10,
-                //       itemBuilder: (context, index) {
-                //         return Container(
-                //           padding: EdgeInsets.only(bottom: 15),
-                //           child: Row(
-                //             children: [
-                //               Image.asset(
-                //                 'assets/images/chaff.jpg',
-                //                 width: _size.height * 0.085,
-                //                 height: _size.height * 0.085,
-                //               ),
-                //               const SizedBox(
-                //                 width: 15,
-                //               ),
-                //               Column(
-                //                 crossAxisAlignment: CrossAxisAlignment.start,
-                //                 children: [
-                //                   Text('Chaff & Dust'),
-                //                   Text(
-                //                     "HYONNA",
-                //                     style: _textTheme.bodyText1!.copyWith(
-                //                         fontSize: 10, color: Colors.blueGrey),
-                //                   ),
-                //                 ],
-                //               )
-                //             ],
-                //           ),
-                //         );
-                //       }),
-                // ),
                 Column(
                   children: [
-                    for (int i = 0; i < 20; i++)
+                    for (int i = 0; i < emotion!.recommendations.length; i++)
                       Container(
-                        padding: EdgeInsets.only(bottom: 15),
+                        padding: const EdgeInsets.only(bottom: 15),
                         child: Row(
                           children: [
                             Image.asset(
-                              'assets/images/chaff.jpg',
+                              'assets/images/album-placeholder.png',
                               width: _size.height * 0.085,
                               height: _size.height * 0.085,
                             ),
@@ -102,7 +74,7 @@ class EmotionScreen extends StatelessWidget {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Chaff & Dust'),
+                                Text(emotion!.recommendations[i]),
                                 Text(
                                   "HYONNA",
                                   style: _textTheme.bodyText1!.copyWith(
