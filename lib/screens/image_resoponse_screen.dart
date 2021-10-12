@@ -1,11 +1,12 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:optimum_music/constants/dummy.dart';
+import 'package:optimum_music/screens/demographic_screen.dart';
 import 'package:optimum_music/screens/emotion_screen.dart';
+import 'package:optimum_music/services/dio_service.dart';
 import 'package:optimum_music/utils/models.dart';
 import 'package:optimum_music/widgets/app_bar.dart';
 import 'package:optimum_music/widgets/image_response_loading_widget.dart';
-import 'package:shimmer/shimmer.dart';
 
 enum LoadingState { Loading, NotLoading }
 
@@ -24,11 +25,12 @@ class _ImageResponseScreenState extends State<ImageResponseScreen>
     with SingleTickerProviderStateMixin {
   late PageController _tabController;
   LoadingState _lodingState = LoadingState.Loading;
-  Emotion? _emotion;
-  Activity? _activity;
-  Demographic? _demographic;
 
   int _selectedIndex = 0;
+
+  late Demographic _demographic;
+  late Emotion _emotion;
+
   @override
   void initState() {
     _init();
@@ -39,13 +41,32 @@ class _ImageResponseScreenState extends State<ImageResponseScreen>
   }
 
   void _init() async {
-    _emotion = await APICall().emotion();
-    _activity = await APICall().activity();
-    _demographic = await APICall().demographic();
+    await Future.delayed(const Duration(seconds: 3));
 
-    setState(() {
-      _lodingState = LoadingState.NotLoading;
-    });
+    if (widget.imageFile != null) {
+      try {
+        final resDemo = await DioService()
+            .sendRequest(widget.imageFile!.path, 'demographicsImage');
+
+        _demographic = Demographic.fromJson(resDemo);
+      } catch (e) {
+        print('Error Occured while demographic req: $e');
+      }
+
+      try {
+        final resEmo = await DioService()
+            .sendRequest(widget.imageFile!.path, 'emotionImage');
+
+        _emotion = Emotion.fromJson(resEmo);
+      } catch (e) {
+        print('Error Occured while emotion req: $e');
+      }
+
+      await DioService().sendRequest(widget.imageFile!.path, 'emotionImage');
+      setState(() {
+        _lodingState = LoadingState.NotLoading;
+      });
+    }
   }
 
   @override
@@ -145,15 +166,12 @@ class _ImageResponseScreenState extends State<ImageResponseScreen>
                       controller: _tabController,
                       physics: const NeverScrollableScrollPhysics(),
                       children: [
-                        // first tab bar view widget
                         EmotionScreen(
                           emotion: _emotion,
                         ),
-                        EmotionScreen(
-                          emotion: _emotion,
+                        DemographicScreen(
+                          demographic: _demographic,
                         ),
-
-                        // second tab bar view widget
                       ],
                     ),
                   ),

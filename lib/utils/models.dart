@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:optimum_music/constants/dummy.dart';
 
 class Demographic {
-  String? gender;
-  String? age;
-  String? ethnicity;
+  String gender;
+  String age;
+  String ethnicity;
   List<String>? recommendations;
 
   Demographic(

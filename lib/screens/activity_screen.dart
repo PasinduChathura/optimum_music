@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:optimum_music/utils/models.dart';
 
-class EmotionScreen extends StatelessWidget {
-  const EmotionScreen({Key? key, required this.emotion}) : super(key: key);
+class ActivityScreen extends StatelessWidget {
+  const ActivityScreen({Key? key, required this.activity}) : super(key: key);
 
-  final Emotion emotion;
+  final Activity activity;
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +25,9 @@ class EmotionScreen extends StatelessWidget {
                 SizedBox(
                   height: _size.height * 0.04,
                 ),
-                const Text('Identified Current Mood'),
+                const Text('Identified Activity'),
                 Text(
-                  emotion.emotion,
+                  activity.activity,
                   style: _textTheme.headline2!
                       .copyWith(fontWeight: FontWeight.w500),
                 ),
@@ -44,9 +44,9 @@ class EmotionScreen extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    for (int i = 0; i < emotion.recommendations.length; i++)
+                    for (int i = 0; i < activity.recommendations.length; i++)
                       Container(
-                        padding: EdgeInsets.only(bottom: 15),
+                        padding: const EdgeInsets.only(bottom: 15),
                         child: Row(
                           children: [
                             Image.asset(
@@ -57,7 +57,7 @@ class EmotionScreen extends StatelessWidget {
                             const SizedBox(
                               width: 15,
                             ),
-                            Text(emotion.recommendations[i])
+                            Text(activity.recommendations[i])
                           ],
                         ),
                       ),
