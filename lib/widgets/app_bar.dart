@@ -14,8 +14,17 @@ class AppBarWidget extends StatelessWidget {
         padding: EdgeInsets.only(top: _size.height * 0.06),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: _size.width * 0.05),
-          child: AppLogo(
-            height: _size.height * 0.09,
+          child: Row(
+            children: [
+              InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Icon(Icons.arrow_back_ios)),
+              AppLogo(
+                height: _size.height * 0.09,
+              ),
+            ],
           ),
         ),
       ),

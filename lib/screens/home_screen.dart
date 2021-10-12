@@ -4,6 +4,7 @@ import 'package:optimum_music/screens/image_resoponse_screen.dart';
 import 'package:optimum_music/screens/video_resoponse_screen.dart';
 import 'package:optimum_music/widgets/app_logo.dart';
 import 'package:optimum_music/widgets/btn.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -166,27 +167,35 @@ class _HomeScreenState extends State<HomeScreen> {
               onTap: () {
                 _showBottomSheet(
                     onPressedCamera: () async {
-                      await _pickimage(ImageSource.camera);
-                      Navigator.pop(context);
-                      if (_imageFile != null) {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return ImageResponseScreen(
-                            imageFile: _imageFile,
-                          );
-                        }));
+                      if (await Permission.camera.request().isGranted) {
+                        await _pickimage(ImageSource.camera);
+                        Navigator.pop(context);
+                        if (_imageFile != null) {
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (context) {
+                            return ImageResponseScreen(
+                              imageFile: _imageFile,
+                            );
+                          }));
+                        }
+                      } else {
+                        Navigator.pop(context);
                       }
                     },
                     onPressedGallery: () async {
-                      await _pickimage(ImageSource.gallery);
-                      Navigator.pop(context);
-                      if (_imageFile != null) {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return ImageResponseScreen(
-                            imageFile: _imageFile,
-                          );
-                        }));
+                      if (await Permission.storage.request().isGranted) {
+                        await _pickimage(ImageSource.gallery);
+                        Navigator.pop(context);
+                        if (_imageFile != null) {
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (context) {
+                            return ImageResponseScreen(
+                              imageFile: _imageFile,
+                            );
+                          }));
+                        }
+                      } else {
+                        Navigator.pop(context);
                       }
                     },
                     size: _size,
