@@ -57,7 +57,7 @@ class ActivityScreen extends StatelessWidget {
                             const SizedBox(
                               width: 15,
                             ),
-                            Text(activity.recommendations[i])
+                            Flexible(child: Text(activity.recommendations[i]))
                           ],
                         ),
                       ),

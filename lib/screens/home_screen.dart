@@ -209,34 +209,18 @@ class _HomeScreenState extends State<HomeScreen> {
               height: _size.height * 0.01,
             ),
             CustomButton(
-              onTap: () {
-                _showBottomSheet(
-                    onPressedCamera: () async {
-                      await _pickVideo(ImageSource.camera);
-                      Navigator.pop(context);
-                      if (_imageFile != null) {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return VideoResponseScreen(
-                            videoFile: _imageFile,
-                          );
-                        }));
-                      }
-                    },
-                    onPressedGallery: () async {
-                      await _pickVideo(ImageSource.gallery);
-                      Navigator.pop(context);
-                      if (_imageFile != null) {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (context) {
-                          return VideoResponseScreen(
-                            videoFile: _imageFile,
-                          );
-                        }));
-                      }
-                    },
-                    size: _size,
-                    textTheme: _textTheme);
+              onTap: () async {
+                if (await Permission.storage.request().isGranted) {
+                  await _pickVideo(ImageSource.gallery);
+                  if (_imageFile != null) {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) {
+                      return VideoResponseScreen(
+                        videoFile: _imageFile,
+                      );
+                    }));
+                  }
+                }
               },
               index: 2,
               title: 'Add Video',

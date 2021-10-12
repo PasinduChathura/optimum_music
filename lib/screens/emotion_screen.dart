@@ -57,7 +57,7 @@ class EmotionScreen extends StatelessWidget {
                             const SizedBox(
                               width: 15,
                             ),
-                            Text(emotion.recommendations[i])
+                            Flexible(child: Text(emotion.recommendations[i]))
                           ],
                         ),
                       ),

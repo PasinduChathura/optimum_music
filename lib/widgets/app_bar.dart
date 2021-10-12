@@ -15,6 +15,7 @@ class AppBarWidget extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: _size.width * 0.05),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               InkWell(
                   onTap: () {
@@ -24,6 +25,7 @@ class AppBarWidget extends StatelessWidget {
               AppLogo(
                 height: _size.height * 0.09,
               ),
+              SizedBox()
             ],
           ),
         ),

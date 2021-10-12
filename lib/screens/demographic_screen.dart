@@ -124,7 +124,7 @@ class DemographicScreen extends StatelessWidget {
                                   const SizedBox(
                                     width: 15,
                                   ),
-                                  Text(demographic.recommendations![i])
+                                  Flexible(child: Text(demographic.recommendations![i]))
                                 ],
                               ),
                             ),
